@@ -1,11 +1,13 @@
 # Using official python runtime base image
-FROM python:2.7-alpine
+FROM python:3.8
 
+RUN echo net.ipv4.ip_forward=1 >> /etc/sysctl.d/enable-ip-forward.conf
 # Set the application directory
 WORKDIR /app
 
 # Install our requirements.txt
 ADD requirements.txt /app/requirements.txt
+
 RUN pip install -r requirements.txt
 
 # Copy our code from the current folder to /app inside the container
